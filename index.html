@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><!-- Tambahkan di dalam <head> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aksara Cloud</title>
+  <link rel="icon" type="image/png" href="img/icon.png" />
+  <style>
+    :root {
+      --primary: #449cea;
+      --secondary: #583cc1;
+      --light: #f3eceb;
+      --bg: #0f0f1a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+  font-family: 'Segoe UI', sans-serif;
+  background-image: url("Background.jpeg"); /* Ganti ini sesuai lokasi file gambarmu */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--light);
+}
+
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      background: linear-gradient(to right, var(--secondary), var(--primary));
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.3rem 0.6rem;
+      border-radius: 30px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--light);
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      transition: background 0.3s;
+    }
+
+    nav a:hover, nav a.active {
+      background: var(--primary);
+    }
+
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 3rem;
+    }
+
+    .hero-text {
+      max-width: 500px;
+    }
+
+    .hero-text h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .hero-text p {
+      margin-bottom: 2rem;
+    }
+
+    .hero-img img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 20px;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      margin: 1.5rem 0 1rem 0;
+      padding: 0 2rem;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
+      padding: 0 2rem 2rem;
+    }
+
+    .card {
+      background: #1c1c2b;
+      border-radius: 10px;
+      padding: 0.5rem;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      color: white;
+    }
+
+    .card p {
+      font-size: 0.85rem;
+      color: #ccc;
+      margin-top: 0.3rem;
+    }
+
+    .top-sellers .card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: #292948;
+    }
+
+    .top-sellers .card img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .cta {
+      text-align: center;
+      background: linear-gradient(to right, var(--secondary), var(--primary));
+      border-radius: 20px;
+      margin: 2rem;
+      padding: 2rem;
+    }
+
+    .cta h2 {
+      margin-bottom: 1rem;
+    }
+
+    .cta button {
+      background: white;
+      color: #000;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      background: #1c1c2b;
+      color: #aaa;
+      font-size: 0.9rem;
+      padding: 2rem;
+    }
+
+    footer div {
+      margin: 1rem;
+    }
+
+    .whatsapp-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25D366;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 55px;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .whatsapp-button img {
+      width: 30px;
+      height: 30px;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem;
+      }
+
+      .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 768px) and (max-width: 1024px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    padding: 4rem 3rem 3rem;
+    gap: 2rem;
+  }
+
+  .hero-text {
+    max-width: 50%;
+  }
+
+  .hero-text h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-text p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+
+  .hero-img {
+    max-width: 45%;
+  }
+
+  .hero-img img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="img/logo.png" alt="Logo" />
+    </div>
+    <nav>
+      <a href="Index.html" class="active">Home</a>
+      <a href="https://api.whatsapp.com/send/?phone=6282392475185&text&type=phone_number&app_absent=0">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Selamat Datang Di Aksara</h1>
+      <p>Platform e-book cerita anak yang seru, penuh pesan moral dan pembentuk karakter.
+        Bersama Aksara, anak-anak diajak membaca, belajar, dan bermimpi lewat kisah-kisah penuh makna. </p>
+    </div>
+    <div class="hero-img">
+      <img src="Buku.png" alt="NFT Hero" />
+    </div>
+  </section>
+
+  <section class="popular">
+    <h2 class="section-title">Cerita Menarik Tentang Hewan</h2>
+    <div class="card-grid">
+      <a class="card" href="E-Book_1.html">
+        <img src="E-book1/1.jpg" alt="NFT 1">
+        <h3>Hadiah Terakhir <br>Si Rubah</h3>
+        <p></p>
+      </a>
+      <a class="card" href="E-Book_2.html">
+        <img src="E-book2/1.png " alt="NFT 2">
+        <h3>Semut & Belalang <br>Sahabat Yang Belajar</h3>
+        <p></p>
+      </a>
+      <a class="card" href="E-Book_3.html">
+        <img src="E-book3/1.png" alt="NFT 3">
+        <h3>Tikus & Penyihir</h3>
+        <p></p>
+      </a>
+      <a class="card" href="E-Book_4.html">
+        <img src="E-book4/1.png" alt="NFT 3">
+        <h3>Si Landak & Pelukan <br> Yang Ditunggu</h3>
+        <p></p>
+      </a>
+      <a class="card" href="E-Book_5.html">
+        <img src="E-book5/1.png" alt="NFT 3">
+        <h3>Koala Pemberani</h3>
+        <p></p>
+      </a>
+      <a class="card" href="E-Book_6.html">
+        <img src="E-book6/1.png" alt="NFT 3">
+        <h3>Jangan Lihat Rupa,<br> Tapi Hati</h3>
+        <p></p>
+      </a>
+      <a class="card" href="E-Book_7.html">
+        <img src="E-book7/1.png" alt="NFT 3">
+        <h3>Langkah Kecil <br> Perubahan Besar</h3>
+        <p></p>
+      </a>
+      <a class="card" href="E-Book_8.html">
+        <img src="E-book8/1.png" alt="NFT 3">
+        <h3>Jembatan Daun Semut</h3>
+        <p></p>
+      </a>
+      <a class="card" href="E-Book_9.html">
+        <img src="E-book9/1.png" alt="NFT 3">
+        <h3>Enggak Harus Sempurna <br> Untuk Jadi Hebat</h3>
+        <p></p>
+      </a>
+
+    </div>
+  </section>
+  <section class="popular">
+    <h2 class="section-title">Cerita Dunia Anak</h2>
+    <div class="card-grid">
+      <a class="card" href="Buku1.html">
+        <img src="Buku1/1.png" alt="NFT 1">
+        <h3>Toko Waktu</h3>
+        <p></p>
+      </a>
+      <a class="card" href="Buku2.html">
+        <img src="Buku2/1.png"NFT 2">
+        <h3>Berani Bilang Tidak</h3>
+        <p></p>
+      </a>
+      <a class="card" href="Buku3.html">
+        <img src="Buku3/1.png" alt="NFT 3">
+        <h3>Tumbuh Bersama <br> Tanggung Jawab</h3>
+        <p></p>
+      </a>
+      <a class="card" href="Buku4.html">
+        <img src="Buku4/1.png" alt="NFT 3">
+        <h3>Dilarang Karena Sayang</h3>
+        <p></p>
+      </a>
+      <a class="card" href="Buku5.html">
+        <img src="Buku5/1.png" alt="NFT 3">
+        <h3>Dunia Didalam <br> Buku Kecil</h3>
+        <p></p>
+      </a>
+      <a class="card" href="Buku6.html">
+        <img src="Buku6/1.png" alt="NFT 3">
+        <h3>Kekuatan Dalam Diri</h3>
+        <p></p>
+      </a>
+      <a class="card" href="Buku7.html">
+        <img src="Buku7/1.png" alt="NFT 3">
+        <h3>Kejujuran Yang Menyelamatkan</h3>
+        <p></p>
+      </a>
+      <a class="card" href="Buku8.html">
+        <img src="Buku8/1.png" alt="NFT 3">
+        <h3>Mila dan <br> Rasa Syukur</h3>
+        <p></p>
+      </a>
+      <a class="card" href="Buku9.html">
+        <img src="Buku9/1.png" alt="NFT 3">
+        <h3>Pahlawan Tak <br> Pernah Libur</h3>
+        <p></p>
+      </a>
+      <a class="card" href="Buku10.html">
+        <img src="Buku10/1.png" alt="NFT 3">
+        <h3>Riko dan <br> Kotak Ajaib</h3>
+        <p></p>
+      </a>
+      <a class="card" href="Buku11.html">
+        <img src="Buku11/1.png" alt="NFT 3">
+        <h3>Marah Tanda Sayang</h3>
+        <p></p>
+      </a>
+
+    </div>
+  </section>
+
+
+  <footer>
+    <div>
+      <strong>Aksara Cloud</strong><br>
+      Platform e-book cerita anak yang seru, penuh pesan<br> moral dan pembentuk karakter. 
+    </div>
+    <div>
+      <strong>Aksara</strong><br>
+      Education<br>Digital E-Book<br>Inspiration
+    </div>
+    <div>
+      <strong>Our Company</strong><br>
+      Aksara Cloud adalah perusahaan digital yang dibuat<br> bertujuan untuk memperbanyak literasi<br>
+      anak kecil di indonesia 
+    </div>
+  </footer>
+  
+  
+  <a href="https://wa.me/6282392475185" target="_blank" class="whatsapp-button">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp--v1.png" alt="WhatsApp" />
+  </a>
+</body>
+</html>
