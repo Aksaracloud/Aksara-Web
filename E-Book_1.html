@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <link rel="icon" type="image/png" href="img/icon.png" />
+  <title>Aksara Cloud Flipbook</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-image: url("Background.jpeg"); /* Ganti ke nama file kamu */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: 'Segoe UI', sans-serif;
+      overflow-x: hidden;
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 24px;
+      background: linear-gradient(to right, #583cc1, #449cea);
+      color: #fff;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .nav-toggle {
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      background-color: #5C3AFF;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav-toggle:hover {
+      background-color: #4a2dcc;
+      transform: translateY(-2px);
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropbtn {
+      background-color: #5C3AFF;
+      color: white;
+      padding: 10px 16px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .dropbtn:hover {
+      background-color: #4a2dcc;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #fff;
+      min-width: 160px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .dropdown-content a {
+      color: #333;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      min-height: calc(100vh - 60px);
+    }
+
+    .flipbook {
+      width: 90vmin;
+      height: 90vmin;
+      max-width: 1080px;
+      max-height: 1080px;
+      position: relative;
+      perspective: 1500px;
+      background-color: rgba(255,255,255,0.9);
+      margin: auto;
+      transition: all 0.5s ease;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      overflow: hidden;
+      touch-action: pan-y;
+    }
+
+    .page {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: #fff;
+      transform-origin: left center;
+      transition: transform 1s ease-in-out;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      backface-visibility: hidden;
+    }
+
+    .page img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .page.flipped {
+      transform: rotateY(-180deg);
+    }
+
+    .controls {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .controls button {
+      padding: 12px 24px;
+      margin: 5px;
+      border: none;
+      border-radius: 6px;
+      background-color: #FFD700;
+      color: #000;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .controls button:hover {
+      background-color: #e6c200;
+      transform: translateY(-2px);
+    }
+
+    .controls button:disabled {
+      background-color: #ccc !important;
+      color: #666 !important;
+      box-shadow: none;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    @media (max-width: 768px) {
+      .navbar { padding: 10px 15px; }
+      .logo img { height: 32px; }
+      .nav-toggle, .dropbtn { padding: 8px 12px; font-size: 14px; }
+      .controls button { padding: 10px 18px; font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <img src="img/logo.png" alt="Logo Aksara Cloud" />
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-toggle">Keluar</a>
+      <div class="dropdown">
+        <button class="dropbtn">☰ Menu</button>
+        <div class="dropdown-content">
+          <a href="index.html">Home</a>
+          <a href="https://wa.me/6282392475185">Contact</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main">
+    <div class="flipbook" id="flipbook">
+      <!-- 32 Halaman -->
+      <!-- Ganti src sesuai direktori -->
+      <div class="page"><img src="E-book1/1.jpg" alt="Page 1"></div>
+      <div class="page"><img src="E-book1/2.jpg" alt="Page 2"></div>
+      <div class="page"><img src="E-book1/3.jpg" alt="Page 3"></div>
+      <div class="page"><img src="E-book1/4.jpg" alt="Page 4"></div>
+      <div class="page"><img src="E-book1/5.jpg" alt="Page 5"></div>
+      <div class="page"><img src="E-book1/6.jpg" alt="Page 6"></div>
+      <div class="page"><img src="E-book1/7.jpg" alt="Page 7"></div>
+      <div class="page"><img src="E-book1/8.jpg" alt="Page 8"></div>
+      <div class="page"><img src="E-book1/9.jpg" alt="Page 9"></div>
+      <div class="page"><img src="E-book1/10.jpg" alt="Page 10"></div>
+      <div class="page"><img src="E-book1/11.jpg" alt="Page 11"></div>
+      <div class="page"><img src="E-book1/12.jpg" alt="Page 12"></div>
+      <div class="page"><img src="E-book1/13.jpg" alt="Page 13"></div>
+      <div class="page"><img src="E-book1/14.jpg" alt="Page 14"></div>
+      <div class="page"><img src="E-book1/15.jpg" alt="Page 15"></div>
+      <div class="page"><img src="E-book1/16.jpg" alt="Page 16"></div>
+      <div class="page"><img src="E-book1/17.jpg" alt="Page 17"></div>
+      <div class="page"><img src="E-book1/18.jpg" alt="Page 18"></div>
+      <div class="page"><img src="E-book1/19.jpg" alt="Page 19"></div>
+      <div class="page"><img src="E-book1/20.jpg" alt="Page 20"></div>
+      <div class="page"><img src="E-book1/21.jpg" alt="Page 21"></div>
+      <div class="page"><img src="E-book1/22.jpg" alt="Page 22"></div>
+      <div class="page"><img src="E-book1/23.jpg" alt="Page 23"></div>
+      <div class="page"><img src="E-book1/24.jpg" alt="Page 24"></div>
+      <div class="page"><img src="E-book1/25.jpg" alt="Page 25"></div>
+      <div class="page"><img src="E-book1/26.jpg" alt="Page 26"></div>
+      <div class="page"><img src="E-book1/27.jpg" alt="Page 27"></div>
+      <div class="page"><img src="E-book1/28.jpg" alt="Page 28"></div>
+      <div class="page"><img src="E-book1/29.jpg" alt="Page 29"></div>
+      <div class="page"><img src="E-book1/30.jpg" alt="Page 30"></div>
+      <div class="page"><img src="E-book1/31.jpg" alt="Page 31"></div>
+      <div class="page"><img src="E-book1/32.jpg" alt="Page 32"></div>
+      
+    </div>
+
+    <div class="controls">
+      <button onclick="prevPage()">⟵ Sebelumnya</button>
+      <button onclick="nextPage()">Selanjutnya ⟶</button>
+    </div>
+  </div>
+
+  <script>
+    const pages = document.querySelectorAll('.page');
+    let current = 0;
+    const prevBtn = document.querySelector('button[onclick="prevPage()"]');
+    const nextBtn = document.querySelector('button[onclick="nextPage()"]');
+
+    pages.forEach((page, i) => {
+      page.style.zIndex = pages.length - i;
+    });
+
+    function updateButtons() {
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current >= pages.length - 1;
+    }
+
+    function nextPage() {
+      if (current < pages.length - 1) {
+        pages[current].classList.add('flipped');
+        pages[current].style.zIndex = pages.length - current;
+        current++;
+        updateButtons();
+      }
+    }
+
+    function prevPage() {
+      if (current > 0) {
+        current--;
+        pages[current].classList.remove('flipped');
+        pages[current].style.zIndex = pages.length - current;
+        updateButtons();
+      }
+    }
+
+    const flipbook = document.getElementById('flipbook');
+    let touchStartX = null;
+    let touchEndX = null;
+
+    flipbook.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    flipbook.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchEndX < touchStartX - 50) nextPage();
+      if (touchEndX > touchStartX + 50) prevPage();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') nextPage();
+      if (e.key === 'ArrowLeft') prevPage();
+    });
+
+    updateButtons();
+  </script>
+</body>
+</html>
